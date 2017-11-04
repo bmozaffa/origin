@@ -303,6 +303,10 @@ build-rpms-redistributable:
 	hack/build-rpm-release.sh
 .PHONY: build-rpms-redistributable
 
+build-base-images:
+	hack/build-base-images.sh
+.PHONY: build-base-images
+
 # Vendor the Origin Web Console
 #
 # Args:
