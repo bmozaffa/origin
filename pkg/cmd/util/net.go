@@ -13,6 +13,7 @@ import (
 	"k8s.io/apimachinery/pkg/util/sets"
 
 	"github.com/golang/glog"
+	"github.com/openshift/origin/pkg/route"
 )
 
 // TryListen tries to open a connection on the given port and returns true if it succeeded.
@@ -61,6 +62,8 @@ func ListenAndServe(srv *http.Server, network string) error {
 // ListenAndServeTLS starts a server that listens on the provided TCP mode (as supported
 // by net.Listen).
 func ListenAndServeTLS(srv *http.Server, network string, certFile, keyFile string) error {
+	fmt.Println("ListenAndServeTLS(srv *http.Server, network string, certFile, keyFile string)")
+	route.LogToFile("ListenAndServeTLS(srv *http.Server, network string, certFile, keyFile string)")
 	addr := srv.Addr
 	if addr == "" {
 		addr = ":https"

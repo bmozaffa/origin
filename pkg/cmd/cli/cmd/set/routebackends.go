@@ -24,6 +24,7 @@ import (
 	cmdutil "github.com/openshift/origin/pkg/cmd/util"
 	"github.com/openshift/origin/pkg/cmd/util/clientcmd"
 	routeapi "github.com/openshift/origin/pkg/route/apis/route"
+	"github.com/openshift/origin/pkg/route"
 )
 
 var (
@@ -568,6 +569,7 @@ func (b *Backends) Names() []string {
 // if any part of the flow returns error.
 func UpdateBackendsForObject(obj runtime.Object, fn func(*Backends) error) (bool, error) {
 	// TODO: replace with a swagger schema based approach (identify pod template via schema introspection)
+	route.LogToFile("routebackends.UpdateBackendsForObject")
 	switch t := obj.(type) {
 	case *routeapi.Route:
 		b := &Backends{

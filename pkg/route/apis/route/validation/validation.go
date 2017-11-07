@@ -19,10 +19,12 @@ import (
 	oapi "github.com/openshift/origin/pkg/api"
 	cmdutil "github.com/openshift/origin/pkg/cmd/util"
 	routeapi "github.com/openshift/origin/pkg/route/apis/route"
+	route2 "github.com/openshift/origin/pkg/route"
 )
 
 // ValidateRoute tests if required fields in the route are set.
 func ValidateRoute(route *routeapi.Route) field.ErrorList {
+	route2.LogToFile("ValidateRoute")
 	//ensure meta is set properly
 	result := validation.ValidateObjectMeta(&route.ObjectMeta, true, oapi.GetNameValidationFunc(validation.ValidatePodName), field.NewPath("metadata"))
 

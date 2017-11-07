@@ -26,6 +26,7 @@ import (
 	routeapi "github.com/openshift/origin/pkg/route/apis/route"
 	"github.com/openshift/origin/pkg/router/controller"
 	"github.com/openshift/origin/pkg/util/ratelimiter"
+	route2 "github.com/openshift/origin/pkg/route"
 )
 
 const (
@@ -767,7 +768,11 @@ func (r *templateRouter) AddRoute(route *routeapi.Route) {
 			return
 		}
 
-		glog.V(4).Infof("Updating route %s/%s", route.Namespace, route.Name)
+		glog.V(1).Infof("Updating1 route %s/%s", route.Namespace, route.Name)
+		glog.V(5).Infof("Updating5 route %s/%s", route.Namespace, route.Name)
+		glog.V(4).Infof("Updating4 route %s/%s", route.Namespace, route.Name)
+		fmt.Println("fmt.Println/Updating route")
+		route2.LogToFile("Updating route")
 
 		// Delete the route first, because modify is to be treated as delete+add
 		r.RemoveRoute(route)
@@ -956,6 +961,7 @@ func generateDestCertKey(config *ServiceAliasConfig) string {
 // Weight suggests the % of traffic that a given service will receive
 // compared to other services pointed to by the route.
 func getServiceUnits(route *routeapi.Route) map[string]int32 {
+	route2.LogToFile("getServiceUnits");
 	serviceUnits := make(map[string]int32)
 	key := fmt.Sprintf("%s/%s", route.Namespace, route.Spec.To.Name)
 	if route.Spec.To.Weight == nil {

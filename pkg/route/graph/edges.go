@@ -8,6 +8,7 @@ import (
 	osgraph "github.com/openshift/origin/pkg/api/graph"
 	kubegraph "github.com/openshift/origin/pkg/api/kubegraph/nodes"
 	routegraph "github.com/openshift/origin/pkg/route/graph/nodes"
+	"github.com/openshift/origin/pkg/route"
 )
 
 const (
@@ -18,6 +19,7 @@ const (
 
 // AddRouteEdges adds an edge that connect a service to a route in the given graph
 func AddRouteEdges(g osgraph.MutableUniqueGraph, node *routegraph.RouteNode) {
+	route.LogToFile("AddRouteEdges");
 	syntheticService := &kapi.Service{}
 	syntheticService.Namespace = node.Namespace
 	syntheticService.Name = node.Spec.To.Name

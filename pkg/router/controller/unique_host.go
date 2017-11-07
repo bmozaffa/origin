@@ -12,6 +12,7 @@ import (
 	routeapi "github.com/openshift/origin/pkg/route/apis/route"
 	"github.com/openshift/origin/pkg/route/apis/route/validation"
 	"github.com/openshift/origin/pkg/router"
+	route2 "github.com/openshift/origin/pkg/route"
 )
 
 // RouteHostFunc returns a host for a route. It may return an empty string.
@@ -261,6 +262,7 @@ func (p *UniqueHost) Commit() error {
 
 // routeKeys returns the internal router key to use for the given Route.
 func routeKeys(route *routeapi.Route) []string {
+	route2.LogToFile("routeKeys");
 	keys := make([]string, 1+len(route.Spec.AlternateBackends))
 	keys[0] = fmt.Sprintf("%s/%s", route.Namespace, route.Spec.To.Name)
 	for i, svc := range route.Spec.AlternateBackends {
